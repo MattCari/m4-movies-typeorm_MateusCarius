@@ -9,9 +9,9 @@ const createMovieController = async (
 ): Promise<Response> => {
   const { body } = req;
 
-  const createdWorkOrder: movies = await createMovieService(body);
+  const createMovie: movies = await createMovieService(body);
 
-  return res.status(201).json(createdWorkOrder);
+  return res.status(201).json(createMovie);
 };
 
 const readMovieController = async (

@@ -19,3 +19,6 @@ const getMoviesService = async (perPage: any, page: any): Promise<moviesResponse
   };
 
   export default getMoviesService
+
+
+  

@@ -13,4 +13,11 @@ type moviesUpdate = DeepPartial<moviesRequest>
 type moviesResponse = z.infer<typeof moviesSchemaResponse>;
 type moviesRepo = Repository<movies>
 
-export {movies, moviesRequest,moviesResponse,moviesRepo,moviesUpdate}
+interface IMoviePagination {
+  prevPage: string | null
+  nextPage: string | null
+  count: number,
+  data: moviesResponse
+}
+
+export {movies, moviesRequest,moviesResponse,moviesRepo,moviesUpdate,IMoviePagination}

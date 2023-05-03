@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
-import { movies, moviesResponse } from "../interfaces/movies.interfaces";
+import {
+  IMoviePagination,
+  movies
+} from "../interfaces/movies.interfaces";
 import createMovieService from "../services/createMovie.service";
 import getMoviesService from "../services/getMovie.service";
 import updateMovieService from "../services/updateMovie.service";
@@ -20,9 +23,19 @@ const readMovieController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { perPage, page } = req.query;
-
-  const movies: moviesResponse = await getMoviesService(perPage, page);
+  const perPage: number | undefined = Number(req.query.perPage);
+  const page: number | undefined = Number(req.query.page);
+  const order: string | undefined = String(req.query.order);
+  const sort: string | undefined = String(req.query.sort);
+  //const {sort, order} = req.query
+  console.log(req.query)
+  const movies: IMoviePagination = await getMoviesService(
+    perPage,
+    page,
+    order,
+    sort
+  );
+  
 
   return res.status(200).json(movies);
 };
@@ -42,10 +55,15 @@ const removeMovieController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const {id} = req.params
-  const deletedMovie = await deleteMovieService(~~id)
+  const { id } = req.params;
+  const deletedMovie = await deleteMovieService(~~id);
 
-  return res.status(200).json()
+  return res.status(200).json();
 };
 
-export { createMovieController, readMovieController, updatedMovieController, removeMovieController };
+export {
+  createMovieController,
+  readMovieController,
+  updatedMovieController,
+  removeMovieController,
+};

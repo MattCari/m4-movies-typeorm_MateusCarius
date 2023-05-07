@@ -5,8 +5,8 @@ import { IMoviePagination, moviesRepo } from "../interfaces/movies.interfaces";
 const getMoviesService = async (
   perPage: number | undefined,
   page: number | undefined,
-  order: string | undefined,
-  sort: string | undefined
+  order: any,
+  sort: any
 ): Promise<IMoviePagination> => {
   const movieRepo: moviesRepo = AppDataSource.getRepository(Movie);
   const take: number = perPage || 5;

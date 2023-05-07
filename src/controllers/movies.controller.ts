@@ -25,8 +25,8 @@ const readMovieController = async (
 ): Promise<Response> => {
   const perPage: number | undefined = Number(req.query.perPage);
   const page: number | undefined = Number(req.query.page);
-  const order: string | undefined = String(req.query.order);
-  const sort: string | undefined = String(req.query.sort);
+  const order: any = (req.query.order)?.toString();
+  const sort: any = (req.query.sort)?.toString();
   //const {sort, order} = req.query
   console.log(req.query)
   const movies: IMoviePagination = await getMoviesService(
@@ -58,7 +58,7 @@ const removeMovieController = async (
   const { id } = req.params;
   const deletedMovie = await deleteMovieService(~~id);
 
-  return res.status(200).json();
+  return res.status(204).json();
 };
 
 export {
